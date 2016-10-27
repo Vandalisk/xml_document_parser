@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'sidekiq'
 gem 'faker'
 gem 'factory_girl'
+gem 'annotate'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
