@@ -16,5 +16,16 @@
 
 class Contact < ApplicationRecord
   # ATTRIBUTES = %i(guid first_name middle_name last_name phone fax email organization_id)
-  has_one :organization
+  ASSOCIATED_MODELS = {
+    organization: {
+      class: 'Organization', type: 'belongs_to', nested_key: 'organization_attributes'
+    }
+  }
+
+  NOT_INCLUDE = %w(id organization_id created_at updated_at)
+
+  belongs_to :organization
+  has_many :purchases
+
+  accepts_nested_attributes_for :organization
 end

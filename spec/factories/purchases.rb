@@ -1,3 +1,28 @@
+# == Schema Information
+#
+# Table name: purchases
+#
+#  id                         :integer          not null, primary key
+#  guid                       :string
+#  create_date_time           :datetime
+#  registration_number        :integer
+#  name                       :string
+#  purchase_method_code       :integer
+#  purchase_code_name         :string
+#  publication_date_time      :datetime
+#  modification_date          :datetime
+#  status                     :string
+#  version                    :integer
+#  save_user_id               :integer
+#  examination_place          :text
+#  examination_date_time      :datetime
+#  submission_close_date_time :datetime
+#  publication_planned_date   :datetime
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  contact_id                 :integer
+#
+
 FactoryGirl.define do
   factory :purchase do
     guid { "759e7ac3-73cb-4b2d-bb11-7a6119e00a66" }

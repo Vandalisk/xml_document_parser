@@ -20,6 +20,7 @@
 #  publication_planned_date   :datetime
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
+#  contact_id                 :integer
 #
 
 require 'rails_helper'

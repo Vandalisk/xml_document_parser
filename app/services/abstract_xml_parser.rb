@@ -7,23 +7,17 @@ class AbstractXmlParser
     doc = Nokogiri::XML(File.open(@file_path))
 
     namespaces = doc.namespaces
+    notice_nodes = doc.xpath("//ns2:purchaseNoticeData")
 
     # TODO: change model determination
-    model = get_model('criteria')
+    primary_model = AbstractModel.new('Purchase')
 
-    columns = model.columns_for_parsing
+    grabber = AttributesGrabber.new(primary_model, notice_nodes)
 
-    notice_data = doc.xpath("//ns2:purchaseNoticeData")
-
-    attributes = columns.inject({}) do |hash, column|
-      hash[column.underscore] = notice_data.xpath("//ns2:#{column}").text
-      hash
+    ActiveRecord::Base.transaction do
+      attributes = grabber.get_attributes
+      binding.pry
+      primary_model.create(attributes)
     end
-
-    new_object = model.new(attributes)
-  end
-
-  def get_model(criteria)
-    Purchase
   end
 end

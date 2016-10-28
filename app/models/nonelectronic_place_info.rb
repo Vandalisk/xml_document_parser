@@ -12,4 +12,8 @@
 
 class NonelectronicPlaceInfo < ApplicationRecord
   # ATTRIBUTES = %i(summarizing_place summarizing_date_time purchase_id)
+  ASSOCIATED_MODELS = {
+    purchase: { class: 'Purchase', type: 'belongs_to', nested_key: 'purchase_attributes' }
+  }
+  NOT_INCLUDE = %w(id purchase_id created_at updated_at)
 end
