@@ -1,0 +1,2 @@
+class NonelectronicPlaceInfo < ApplicationRecord
+end
