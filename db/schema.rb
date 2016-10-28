@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161028065906) do
+ActiveRecord::Schema.define(version: 20161028084519) do
 
   create_table "attachments", force: :cascade do |t|
     t.string   "guid"
@@ -62,9 +62,11 @@ ActiveRecord::Schema.define(version: 20161028065906) do
     t.integer  "okdp_id"
     t.integer  "okved_id"
     t.integer  "okei_id"
+    t.integer  "lot_id"
     t.bigint   "qty"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["lot_id"], name: "index_lot_items_on_lot_id"
     t.index ["okdp_id"], name: "index_lot_items_on_okdp_id"
     t.index ["okei_id"], name: "index_lot_items_on_okei_id"
     t.index ["okved_id"], name: "index_lot_items_on_okved_id"
@@ -118,30 +120,21 @@ ActiveRecord::Schema.define(version: 20161028065906) do
   create_table "purchases", force: :cascade do |t|
     t.string   "guid"
     t.datetime "create_date_time"
-    t.bigint   "registration_number"
+    t.integer  "registration_number",        limit: 8
     t.string   "name"
-    t.integer  "customer_id"
     t.integer  "purchase_method_code"
     t.string   "purchase_code_name"
-    t.integer  "placer_id"
-    t.integer  "contact"
     t.datetime "publication_date_time"
     t.datetime "modification_date"
-    t.integer  "documentation_delivery"
     t.string   "status"
     t.integer  "version"
     t.integer  "save_user_id"
-    t.integer  "nonelectronic_place_info"
     t.text     "examination_place"
     t.datetime "examination_date_time"
     t.datetime "submission_close_date_time"
     t.datetime "publication_planned_date"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.index ["contact"], name: "index_purchases_on_contact"
-    t.index ["customer_id"], name: "index_purchases_on_customer_id"
-    t.index ["documentation_delivery"], name: "index_purchases_on_documentation_delivery"
-    t.index ["placer_id"], name: "index_purchases_on_placer_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
 end
