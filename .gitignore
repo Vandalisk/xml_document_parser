@@ -19,7 +19,6 @@
 .ruby-gemset
 .ruby-version
 public/
-db/schema.rb
 
 # Ignore Byebug command history file.
 .byebug_history
