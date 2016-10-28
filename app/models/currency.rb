@@ -11,4 +11,5 @@
 #
 
 class Currency < ApplicationRecord
+  # ATTRIBUTES = %i(code digital_code name)
 end

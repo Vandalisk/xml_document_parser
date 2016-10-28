@@ -14,4 +14,5 @@
 #
 
 class Attachment < ApplicationRecord
+  # ATTRIBUTES = %i(guid create_date_time file_name description url purchase_id)
 end

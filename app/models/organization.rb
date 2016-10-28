@@ -18,4 +18,5 @@
 #
 
 class Organization < ApplicationRecord
+  # ATTRIBUTES = %i(full_name short_name inn kpp ogrn legal_address postal_address phone email okato)
 end

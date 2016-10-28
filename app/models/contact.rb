@@ -15,5 +15,6 @@
 #
 
 class Contact < ApplicationRecord
+  # ATTRIBUTES = %i(guid first_name middle_name last_name phone fax email organization_id)
   has_one :organization
 end

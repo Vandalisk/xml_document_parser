@@ -11,4 +11,5 @@
 #
 
 class NonelectronicPlaceInfo < ApplicationRecord
+  # ATTRIBUTES = %i(summarizing_place summarizing_date_time purchase_id)
 end

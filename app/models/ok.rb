@@ -10,4 +10,5 @@
 #
 
 class Ok < ApplicationRecord
+  # ATTRIBUTES = %i(code name)
 end

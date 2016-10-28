@@ -13,4 +13,5 @@
 #
 
 class DocumentationDelivery < ApplicationRecord
+  # ATTRIBUTES = %i(delivery_start_date_time delivery_end_date_time place procedure purchase_id)
 end
