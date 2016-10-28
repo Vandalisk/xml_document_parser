@@ -1,4 +1,3 @@
-require 'zip'
 class Unzipper
   def initialize(file_name)
     @file_name = file_name
