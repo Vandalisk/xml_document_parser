@@ -1,0 +1,2 @@
+class LotItem < ApplicationRecord
+end
