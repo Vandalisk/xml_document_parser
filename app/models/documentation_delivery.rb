@@ -1,0 +1,2 @@
+class DocumentationDelivery < ApplicationRecord
+end
