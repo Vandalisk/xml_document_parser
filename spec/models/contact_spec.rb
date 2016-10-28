@@ -13,10 +13,6 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
-# Indexes
-#
-#  index_contacts_on_organization_id  (organization_id)
-#
 
 require 'rails_helper'
 
