@@ -8,6 +8,7 @@
 #  okdp_id        :integer
 #  okved_id       :integer
 #  okei_id        :integer
+#  lot_id         :integer
 #  qty            :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
