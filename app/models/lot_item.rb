@@ -14,4 +14,7 @@
 #
 
 class LotItem < ApplicationRecord
+  has_one :okdp, foreign_key: :okdp_id, class_name: "Ok"
+  has_one :okved, foreign_key: :okved_id, class_name: "Ok"
+  has_one :okei, foreign_key: :okei_id, class_name: "Ok"
 end
