@@ -12,7 +12,7 @@ class CreatePurchases < ActiveRecord::Migration[5.0]
       t.integer :contact, index: true, foreign_key: true
       t.datetime :publication_date_time
       t.datetime :modification_date
-      t.integer :documentationDelivery, index: true, foreign_key: true
+      t.integer :documentation_delivery, index: true, foreign_key: true
       t.string :status
       t.integer :version
       t.integer :save_user_id
