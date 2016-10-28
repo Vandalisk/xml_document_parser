@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161027160547) do
+ActiveRecord::Schema.define(version: 20161028063748) do
+
+  create_table "attachments", force: :cascade do |t|
+    t.string   "guid"
+    t.datetime "create_date_time"
+    t.string   "file_name"
+    t.text     "description"
+    t.string   "url"
+    t.integer  "purchase_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["purchase_id"], name: "index_attachments_on_purchase_id"
+  end
 
   create_table "contacts", force: :cascade do |t|
     t.string   "first_name"
@@ -23,6 +35,61 @@ ActiveRecord::Schema.define(version: 20161027160547) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["organization_id"], name: "index_contacts_on_organization_id"
+  end
+
+  create_table "documentation_deliveries", force: :cascade do |t|
+    t.datetime "delivery_start_date_time"
+    t.datetime "delivery_end_date_time"
+    t.string   "place"
+    t.text     "procedure"
+    t.integer  "purchase_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["purchase_id"], name: "index_documentation_deliveries_on_purchase_id"
+  end
+
+  create_table "lot_items", force: :cascade do |t|
+    t.string   "guid"
+    t.integer  "ordinal_number"
+    t.integer  "okdp_id"
+    t.integer  "okved_id"
+    t.integer  "okei_id"
+    t.bigint   "qty"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["okdp_id"], name: "index_lot_items_on_okdp_id"
+    t.index ["okei_id"], name: "index_lot_items_on_okei_id"
+    t.index ["okved_id"], name: "index_lot_items_on_okved_id"
+  end
+
+  create_table "lots", force: :cascade do |t|
+    t.string   "guid"
+    t.integer  "ordinal_number"
+    t.string   "subject"
+    t.integer  "currency_id"
+    t.decimal  "initial_sum",    precision: 8, scale: 2
+    t.string   "delivery_place"
+    t.integer  "purchase_id"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.index ["currency_id"], name: "index_lots_on_currency_id"
+    t.index ["purchase_id"], name: "index_lots_on_purchase_id"
+  end
+
+  create_table "nonelectronic_place_infos", force: :cascade do |t|
+    t.string   "summarizing_place"
+    t.datetime "summarizing_date_time"
+    t.integer  "purchase_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["purchase_id"], name: "index_nonelectronic_place_infos_on_purchase_id"
+  end
+
+  create_table "oks", force: :cascade do |t|
+    t.string   "code"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -52,7 +119,7 @@ ActiveRecord::Schema.define(version: 20161027160547) do
     t.integer  "contact"
     t.datetime "publication_date_time"
     t.datetime "modification_date"
-    t.integer  "documentationDelivery"
+    t.integer  "documentation_delivery"
     t.string   "status"
     t.integer  "version"
     t.integer  "save_user_id"
@@ -65,7 +132,7 @@ ActiveRecord::Schema.define(version: 20161027160547) do
     t.datetime "updated_at",                 null: false
     t.index ["contact"], name: "index_purchases_on_contact"
     t.index ["customer_id"], name: "index_purchases_on_customer_id"
-    t.index ["documentationDelivery"], name: "index_purchases_on_documentationDelivery"
+    t.index ["documentation_delivery"], name: "index_purchases_on_documentation_delivery"
     t.index ["placer_id"], name: "index_purchases_on_placer_id"
   end
 
