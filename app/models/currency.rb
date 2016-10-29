@@ -11,7 +11,6 @@
 #
 
 class Currency < ApplicationRecord
-  # ATTRIBUTES = %i(code digital_code name)
   NOT_INCLUDE = %w(id created_at updated_at)
   ASSOCIATED_MODELS = {}
 end

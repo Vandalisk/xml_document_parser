@@ -1,25 +1,18 @@
 class AttributesGrabber
-  def initialize(primary_model, nodes)
+  def initialize(primary_model, nodes, namespace)
     @primary_model = primary_model
     @nodes = nodes
+    @namespace = namespace
   end
 
-  def get_attributes
-    get_associated_attributes(@primary_model, @nodes, "//ns2:")
+  def grab!
+    get_associated_attributes(@primary_model, @nodes, @namespace)
   end
 
   private
 
-  def get_model_attributes(model, nodes, prefix = '')
-    model.columns_for_parsing.inject({}) do |hash, column|
-      result_node = nodes.at(prefix + column)
-      hash[column.underscore] = result_node.text if result_node
-      hash
-    end
-  end
-
   def get_associated_attributes(model, nodes, prefix = '')
-    attributes = get_model_attributes(model, nodes, prefix)
+    attributes = get_attributes(model, nodes, prefix)
 
     model::ASSOCIATED_MODELS.each do |model_key, value|
       model_nodes = nodes.search(prefix + model_key.to_s)
@@ -32,6 +25,14 @@ class AttributesGrabber
     end
 
     attributes
+  end
+
+  def get_attributes(model, nodes, prefix = '')
+    model.columns_for_parsing.inject({}) do |hash, column|
+      result_node = nodes.at(prefix + column)
+      hash[column.underscore] = result_node.text if result_node
+      hash
+    end
   end
 
   def get_nested_attributes(model, nodes, attrs)

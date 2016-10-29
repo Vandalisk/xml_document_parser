@@ -15,7 +15,6 @@
 #
 
 class LotItem < ApplicationRecord
-  # ATTRIBUTES = %i(guid ordinal_number okdp_id okved_id okei_id lot_id qty)
   ASSOCIATED_MODELS = {
     okdp: { class: 'Ok', type: 'belongs_to', nested_key: 'okdp_attributes' },
     okved: { class: 'Ok', type: 'belongs_to', nested_key: 'okved_attributes' },

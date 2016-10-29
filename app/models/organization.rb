@@ -23,7 +23,6 @@ class Organization < ApplicationRecord
     contacts: { class: 'Contact', type: 'has_many', item_key: 'contact', nested_key: 'contacts_attributes' }
   }
   NOT_INCLUDE = %w(id purchase_id created_at updated_at)
-  # ATTRIBUTES = %i(full_name short_name inn kpp ogrn legal_address postal_address phone email okato)
   has_many :purchases
   has_many :contacts
 

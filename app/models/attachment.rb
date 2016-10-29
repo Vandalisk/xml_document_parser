@@ -14,7 +14,6 @@
 #
 
 class Attachment < ApplicationRecord
-  # ATTRIBUTES = %i(guid create_date_time file_name description url purchase_id)
   ASSOCIATED_MODELS = {
     purchase: { class: 'Purchase', type: 'belongs_to', nested_key: 'purchase_attributes' }
   }

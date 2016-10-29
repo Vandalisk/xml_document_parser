@@ -15,7 +15,6 @@
 #
 
 class Contact < ApplicationRecord
-  # ATTRIBUTES = %i(guid first_name middle_name last_name phone fax email organization_id)
   ASSOCIATED_MODELS = {
     organization: {
       class: 'Organization', type: 'belongs_to', nested_key: 'organization_attributes'
