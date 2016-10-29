@@ -5,14 +5,28 @@ class AttributesGrabber
   end
 
   def get_attributes
-    attributes = get_primary_attributes
+    get_associated_attributes(@primary_model, @nodes, "//ns2:")
+  end
 
-    @primary_model.associated_models.each do |associated_model_key, value|
-      model_nodes = @nodes.xpath("//ns2:#{associated_model_key}")
+  private
+
+  def get_model_attributes(model, nodes, prefix = '')
+    model.columns_for_parsing.inject({}) do |hash, column|
+      result_node = nodes.at(prefix + column)
+      hash[column.underscore] = result_node.text if result_node
+      hash
+    end
+  end
+
+  def get_associated_attributes(model, nodes, prefix = '')
+    attributes = get_model_attributes(model, nodes, prefix)
+
+    model::ASSOCIATED_MODELS.each do |model_key, value|
+      model_nodes = nodes.search(prefix + model_key.to_s)
       next if model_nodes.size == 0
-      associated_model = AbstractModel.new(value[:class])
+      nested_model = value[:class].constantize
 
-      associated_attributes = get_associated_attributes(associated_model, model_nodes, value)
+      associated_attributes = get_nested_attributes(nested_model, model_nodes, value)
 
       attributes[value[:nested_key]] = associated_attributes
     end
@@ -20,43 +34,15 @@ class AttributesGrabber
     attributes
   end
 
-  private
-
-  def get_primary_attributes
-    @primary_model.columns.inject({}) do |hash, column|
-      hash[column.underscore] = @nodes.xpath("//ns2:#{column}").text
-      hash
-    end
-  end
-
-  def get_associated_attributes(associated_model, nodes, attrs)
+  def get_nested_attributes(model, nodes, attrs)
     if attrs[:type] == 'has_many'
       nodes = nodes.search(attrs[:item_key])
       nodes.inject([]) do |array, node|
-        array << get_associated_attributes(associated_model, node, attrs.slice(:class))
+        array << get_nested_attributes(model, node, attrs.slice(:class))
         array
       end
     else
-      attributes = get_model_attributes(associated_model, nodes)
-      associated_model.associated_models.each do |associated_model_key, value|
-        model_nodes = nodes.search(associated_model_key)
-        next if model_nodes.size == 0
-        nested_associated_model = AbstractModel.new(value[:class])
-
-        associated_attributes = get_associated_attributes(nested_associated_model, model_nodes, value)
-
-        attributes[value[:nested_key]] = associated_attributes
-      end
-
-      attributes
-    end
-  end
-
-  def get_model_attributes(associated_model, nodes)
-    associated_model.columns.inject({}) do |hash, associated_column|
-      res_node = nodes.at(associated_column)
-      hash[associated_column.underscore] = res_node.text if res_node
-      hash
+      get_associated_attributes(model, nodes)
     end
   end
 end

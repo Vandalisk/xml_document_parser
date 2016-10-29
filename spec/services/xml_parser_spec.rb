@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe AbstractXmlParser do
+RSpec.describe XmlParser do
   describe "parse! method should parse the given document" do
     let(:file_name) do
       'spec/fixtures/purchaseNotice_Adygeya_Resp_20130301_000000_20130401_235959_001.xml'
     end
 
-    let(:parser_object) { AbstractXmlParser.new(file_name) }
+    let(:parser_object) { XmlParser.new(file_name) }
     let(:purchase_attributes) { build(:purchase) }
     let(:contact_attributes) { build(:contact) }
     let(:customer_attributes) { build(:organization) }

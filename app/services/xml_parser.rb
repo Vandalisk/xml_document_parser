@@ -1,4 +1,4 @@
-class AbstractXmlParser
+class XmlParser
   def initialize(xml_file_path)
     @file_path = xml_file_path
   end
@@ -10,14 +10,14 @@ class AbstractXmlParser
     notice_nodes = doc.xpath("//ns2:purchaseNoticeData")
 
     # TODO: change model determination
-    primary_model = AbstractModel.new('Purchase')
+    primary_model = 'Purchase'.constantize
 
     grabber = AttributesGrabber.new(primary_model, notice_nodes)
 
     ActiveRecord::Base.transaction do
       attributes = grabber.get_attributes
-
-      primary_model.create(attributes)
+      new_model = primary_model.new(attributes)
+      raise ActiveRecord::Rollback unless new_model.save
     end
   end
 end
