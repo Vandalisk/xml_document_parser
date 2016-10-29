@@ -54,7 +54,8 @@ class AttributesGrabber
 
   def get_model_attributes(associated_model, nodes)
     associated_model.columns.inject({}) do |hash, associated_column|
-      hash[associated_column.underscore] = nodes.search(associated_column).text
+      res_node = nodes.at(associated_column)
+      hash[associated_column.underscore] = res_node.text if res_node
       hash
     end
   end

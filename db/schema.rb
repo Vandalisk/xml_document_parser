@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161028154921) do
+ActiveRecord::Schema.define(version: 20161029131013) do
 
   create_table "attachments", force: :cascade do |t|
     t.string   "guid"
@@ -115,8 +115,6 @@ ActiveRecord::Schema.define(version: 20161028154921) do
     t.string   "okato"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.integer  "purchase_id"
-    t.index ["purchase_id"], name: "index_organizations_on_purchase_id"
   end
 
   create_table "purchases", force: :cascade do |t|
@@ -138,7 +136,11 @@ ActiveRecord::Schema.define(version: 20161028154921) do
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.integer  "contact_id"
+    t.integer  "customer_id"
+    t.integer  "placer_id"
     t.index ["contact_id"], name: "index_purchases_on_contact_id"
+    t.index ["customer_id"], name: "index_purchases_on_customer_id"
+    t.index ["placer_id"], name: "index_purchases_on_placer_id"
   end
 
 end

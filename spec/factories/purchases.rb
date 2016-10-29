@@ -21,6 +21,8 @@
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
 #  contact_id                 :integer
+#  customer_id                :integer
+#  placer_id                  :integer
 #
 
 FactoryGirl.define do

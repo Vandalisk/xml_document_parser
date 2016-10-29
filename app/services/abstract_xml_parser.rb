@@ -16,7 +16,7 @@ class AbstractXmlParser
 
     ActiveRecord::Base.transaction do
       attributes = grabber.get_attributes
-      binding.pry
+
       primary_model.create(attributes)
     end
   end

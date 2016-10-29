@@ -24,8 +24,16 @@ class Contact < ApplicationRecord
 
   NOT_INCLUDE = %w(id organization_id created_at updated_at)
 
-  belongs_to :organization
+  belongs_to :organization, autosave: true
   has_many :purchases
 
   accepts_nested_attributes_for :organization
+
+  def autosave_associated_records_for_organization
+    if db_organization = Organization.find_by(ogrn: organization.ogrn)
+      self.organization = db_organization
+    else
+      self.organization.save!
+    end
+  end
 end
