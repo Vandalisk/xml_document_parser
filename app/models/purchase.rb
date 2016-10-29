@@ -44,6 +44,9 @@ class Purchase < ApplicationRecord
     nonelectronicPlaceInfo: {
       class: 'NonelectronicPlaceInfo', type: 'has_one',
       nested_key: 'nonelectronic_place_info_attributes'
+    },
+    lots: {
+      class: 'Lot', type: 'has_many', item_key: 'lot', nested_key: 'lots_attributes'
     }
   }
   # ASSOCIATED_MODELS = %w(customer placer contact documentation_delivery attachments
@@ -56,11 +59,13 @@ class Purchase < ApplicationRecord
   has_one :documentation_delivery
   has_one :nonelectronic_place_info
   has_many :attachments
+  has_many :lots
 
   accepts_nested_attributes_for :customer,
                                 :placer,
                                 :contact,
                                 :documentation_delivery,
                                 :attachments,
-                                :nonelectronic_place_info
+                                :nonelectronic_place_info,
+                                :lots
 end

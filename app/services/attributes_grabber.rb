@@ -38,7 +38,6 @@ class AttributesGrabber
       end
     else
       attributes = get_model_attributes(associated_model, nodes)
-
       associated_model.associated_models.each do |associated_model_key, value|
         model_nodes = nodes.search(associated_model_key)
         next if model_nodes.size == 0

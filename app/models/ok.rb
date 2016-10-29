@@ -11,4 +11,6 @@
 
 class Ok < ApplicationRecord
   # ATTRIBUTES = %i(code name)
+  ASSOCIATED_MODELS = {}
+  NOT_INCLUDE = %w(id created_at updated_at)
 end

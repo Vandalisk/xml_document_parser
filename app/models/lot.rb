@@ -19,4 +19,14 @@ class Lot < ApplicationRecord
   #                 guid ordinal_number subject currency_id initial_sum delivery_place
   #                 purchase_id
   #                )
+  ASSOCIATED_MODELS = {
+    currency: { class: 'Currency', type: 'belongs_to', nested_key: 'currency_attributes' },
+    lotItems: { class: 'LotItem', type: 'has_many', item_key: 'lotItem', nested_key: 'lot_items_attributes' }
+  }
+  NOT_INCLUDE = %w(id currency_id purchase_id created_at updated_at)
+
+  belongs_to :currency
+  has_many :lot_items
+
+  accepts_nested_attributes_for :currency, :lot_items
 end
