@@ -6,13 +6,13 @@ class AttributesGrabber
   end
 
   def grab!
-    get_associated_attributes(@primary_model, @nodes, @namespace)
+    get_attributes(@primary_model, @nodes, @namespace)
   end
 
   private
 
-  def get_associated_attributes(model, nodes, prefix = '')
-    attributes = get_attributes(model, nodes, prefix)
+  def get_attributes(model, nodes, prefix = '')
+    attributes = get_main_attributes(model, nodes, prefix)
 
     model::ASSOCIATED_MODELS.each do |model_key, value|
       model_nodes = nodes.search(prefix + model_key.to_s)
@@ -27,7 +27,7 @@ class AttributesGrabber
     attributes
   end
 
-  def get_attributes(model, nodes, prefix = '')
+  def get_main_attributes(model, nodes, prefix = '')
     model.columns_for_parsing.inject({}) do |hash, column|
       result_node = nodes.at(prefix + column)
       hash[column.underscore] = result_node.text if result_node
@@ -43,7 +43,7 @@ class AttributesGrabber
         array
       end
     else
-      get_associated_attributes(model, nodes)
+      get_attributes(model, nodes)
     end
   end
 end
