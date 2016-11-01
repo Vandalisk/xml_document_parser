@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: lots
+#
+#  id             :integer          not null, primary key
+#  guid           :string
+#  ordinal_number :integer
+#  subject        :string
+#  currency_id    :integer
+#  initial_sum    :decimal(8, 2)
+#  delivery_place :string
+#  purchase_id    :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
 FactoryGirl.define do
   factory :lot do
     guid { '5d1ccc91-1500-479f-b2f3-0248d09a8e64' }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161029131013) do
+ActiveRecord::Schema.define(version: 20161101112145) do
 
   create_table "attachments", force: :cascade do |t|
     t.string   "guid"
@@ -54,6 +54,14 @@ ActiveRecord::Schema.define(version: 20161029131013) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.index ["purchase_id"], name: "index_documentation_deliveries_on_purchase_id"
+  end
+
+  create_table "exports", force: :cascade do |t|
+    t.string   "purchase_number"
+    t.datetime "doc_publish_date"
+    t.string   "href"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "lot_items", force: :cascade do |t|

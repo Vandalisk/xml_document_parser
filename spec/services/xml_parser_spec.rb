@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe XmlParser do
   describe "parse! method should parse the given document" do
     let(:file_name) do
-      'spec/fixtures/purchaseNotice_Adygeya_Resp_20130301_000000_20130401_235959_001.xml'
+      # 'spec/fixtures/purchaseNotice_Adygeya_Resp_20130301_000000_20130401_235959_001.xml'
+      'spec/fixtures/fcsNotificationZP44_9911111111314001000_14514.xml'
     end
 
     let(:parser_object) { XmlParser.new(file_name) }
